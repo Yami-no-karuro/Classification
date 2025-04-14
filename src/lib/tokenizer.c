@@ -49,7 +49,6 @@ Token *tk_whitespace_tokenize(const char *input, int *token_count)
 
     for (int i = 0; i < count; ++i) {
         char *trimmed = str_trim(parts[i]);
-
         if (strlen(trimmed) == 0) {
             free(trimmed);
             continue;
