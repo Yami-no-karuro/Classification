@@ -37,6 +37,46 @@ int str_count(const char *subject, const char *search)
 }
 
 /**
+ * Converts a string to lowercase.
+ *
+ * @param subject - The original string to convert.
+ * @return - A newly allocated string with all characters converted to lowercase.
+ */
+char *str_to_lower(const char *subject)
+{
+    size_t len = strlen(subject);
+    char *result = (char *)malloc(len + 1);
+    if (!result)
+        return NULL;
+
+    for (size_t i = 0; i < len; ++i)
+        result[i] = tolower((unsigned char)subject[i]);
+
+    result[len] = '\0';
+    return result;
+}
+
+/**
+ * Converts a string to uppercase.
+ *
+ * @param subject - The original string to convert.
+ * @return - A newly allocated string with all characters converted to uppercase.
+ */
+char *str_to_upper(const char *subject)
+{
+    size_t len = strlen(subject);
+    char *result = (char *)malloc(len + 1);
+    if (!result)
+        return NULL;
+
+    for (size_t i = 0; i < len; ++i)
+        result[i] = toupper((unsigned char)subject[i]);
+
+    result[len] = '\0';
+    return result;
+}
+
+/**
  * Splits a string into tokens based on a specified delimiter.
  *
  * @param subject - The original string to split.

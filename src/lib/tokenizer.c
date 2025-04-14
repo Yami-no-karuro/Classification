@@ -48,8 +48,11 @@ Token *tk_tokenize(const char *input, int *token_count)
 
     for (int i = 0; i < count; ++i) {
         char *trimmed = str_trim(parts[i]);
-        char *cleaned = str_strip_punct(trimmed);
+        char *lower = str_to_lower(trimmed);
         free(trimmed);
+
+        char *cleaned = str_strip_punct(lower);
+        free(lower);
 
         if (strlen(cleaned) == 0) {
             free(cleaned);

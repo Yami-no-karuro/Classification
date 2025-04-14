@@ -4,6 +4,9 @@
 int str_contains(const char *subject, const char *search);
 int str_count(const char *subject, const char *search);
 
+char *str_to_lower(const char *subject);
+char *str_to_upper(const char *subject);
+
 char **str_split(const char *subject, char delimiter);
 char *str_join(char **strings, const char *delimiter);
 
