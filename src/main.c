@@ -5,7 +5,7 @@
 int main() 
 {
     int token_count = 0;
-    char *input = "Naive Bayes is a simple technique for constructing classifiers: models that assign class labels to problem instances, represented as vectors of feature values, where the class labels are drawn from some finite set.";
+    char *input = "A Naive Bayes classifier is a probabilistic machine learning model used for classification tasks.";
 
     Token *tokens = tk_tokenize(input, &token_count);
     if (!tokens) {
