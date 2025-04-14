@@ -16,7 +16,6 @@ int tk_get_type(const char *str)
 {
     if (isdigit(str[0])) return TOKEN_NUMBER;
     if (isalpha(str[0])) return TOKEN_WORD;
-    if (ispunct(str[0])) return TOKEN_SYMBOL;
 
     return TOKEN_UNKNOWN;
 }
@@ -49,13 +48,17 @@ Token *tk_whitespace_tokenize(const char *input, int *token_count)
 
     for (int i = 0; i < count; ++i) {
         char *trimmed = str_trim(parts[i]);
-        if (strlen(trimmed) == 0) {
-            free(trimmed);
+        char *cleaned = str_strip_punct(trimmed);
+        free(trimmed);
+
+        if (strlen(cleaned) == 0) {
+            free(cleaned);
+            free(parts[i]);
             continue;
         }
 
-        tokens[*token_count].content = trimmed;
-        tokens[*token_count].type = tk_get_type(trimmed);
+        tokens[*token_count].content = cleaned;
+        tokens[*token_count].type = tk_get_type(cleaned);
         (*token_count)++;
 
         free(parts[i]);

@@ -8,6 +8,7 @@ char **str_split(const char *subject, char delimiter);
 char *str_join(char **strings, const char *delimiter);
 
 char *str_trim(const char *subject);
+char *str_strip_punct(const char *subject);
 char *str_replace(const char *subject, const char *search, const char *replace);
 char *str_replace_all(const char *subject, const char *search, const char *replace);
 

@@ -24,9 +24,6 @@ int main()
             case TOKEN_NUMBER:
                 printf("NUMBER\n");
                 break;
-            case TOKEN_SYMBOL:
-                printf("SYMBOL\n");
-                break;
             default:
                 printf("UNKNOWN\n");
         }

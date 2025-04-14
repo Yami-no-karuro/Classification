@@ -149,6 +149,33 @@ char *str_trim(const char *subject)
 }
 
 /**
+ * Removes punctuation characters from the beginning and end of a string.
+ *
+ * @param subject - The input string to clean.
+ * @return - A newly allocated string with punctuation removed.
+ */
+char *str_strip_punct(const char *subject)
+{
+    const char *start = subject;
+    while (*start && ispunct((unsigned char)*start))
+        start++;
+
+    const char *end = subject + strlen(subject) - 1;
+    while (end > start && ispunct((unsigned char)*end))
+        end--;
+
+    size_t len = end - start + 1;
+    char *result = (char *)malloc(len + 1);
+    if (!result)
+        return NULL;
+
+    strncpy(result, start, len);
+    result[len] = '\0';
+
+    return result;
+}
+
+/**
  * Replaces the first occurrence of a substring within a string with another substring.
  *
  * @param subject - The original string in which the replacement is performed.
