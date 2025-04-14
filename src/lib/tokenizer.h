@@ -14,8 +14,10 @@ typedef struct {
     int type;
 } Token;
 
-int get_token_type(const char *str);
-Token *tokenize(const char *input, int *token_count);
-void free_tokens(Token *tokens, int token_count);
+int tk_get_type(const char *str);
+
+Token *tk_whitespace_tokenize(const char *input, int *token_count);
+
+void tk_free(Token *tokens, int token_count);
 
 #endif

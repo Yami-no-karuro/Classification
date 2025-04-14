@@ -12,7 +12,7 @@
  * @param str - The token string to analyze.
  * @return - One of the values defined in the TokenType enum.
  */
-int get_token_type(const char *str)
+int tk_get_type(const char *str)
 {
     if (isdigit(str[0])) return TOKEN_NUMBER;
     if (isalpha(str[0])) return TOKEN_WORD;
@@ -28,7 +28,7 @@ int get_token_type(const char *str)
  * @param token_count - A pointer to an integer that will be updated with the number of tokens.
  * @return - A dynamically allocated array of Token structs.
  */
-Token *tokenize(const char *input, int *token_count) 
+Token *tk_whitespace_tokenize(const char *input, int *token_count) 
 {
     char **parts = str_split(input, ' ');
     if (!parts) 
@@ -56,7 +56,7 @@ Token *tokenize(const char *input, int *token_count)
         }
 
         tokens[*token_count].content = trimmed;
-        tokens[*token_count].type = get_token_type(trimmed);
+        tokens[*token_count].type = tk_get_type(trimmed);
         (*token_count)++;
 
         free(parts[i]);
@@ -72,7 +72,7 @@ Token *tokenize(const char *input, int *token_count)
  * @param tokens - The array of tokens to free.
  * @param token_count - The number of tokens in the array.
  */
-void free_tokens(Token *tokens, int token_count)
+void tk_free(Token *tokens, int token_count)
 {
     for (int i = 0; i < token_count; i++)
         free(tokens[i].content);
