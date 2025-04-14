@@ -7,7 +7,7 @@ int main()
     int token_count = 0;
     char *input = "Naive Bayes is a simple technique for constructing classifiers: models that assign class labels to problem instances, represented as vectors of feature values, where the class labels are drawn from some finite set.";
 
-    Token *tokens = tk_whitespace_tokenize(input, &token_count);
+    Token *tokens = tk_tokenize(input, &token_count);
     if (!tokens) {
         printf("Error: unable to allocate enough memory for the tokenization process.\n");
         return 1;

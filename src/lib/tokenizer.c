@@ -27,7 +27,7 @@ int tk_get_type(const char *str)
  * @param token_count - A pointer to an integer that will be updated with the number of tokens.
  * @return - A dynamically allocated array of Token structs.
  */
-Token *tk_whitespace_tokenize(const char *input, int *token_count) 
+Token *tk_tokenize(const char *input, int *token_count) 
 {
     char **parts = str_split(input, ' ');
     if (!parts) 

@@ -14,7 +14,7 @@ typedef struct {
 } Token;
 
 int tk_get_type(const char *str);
-Token *tk_whitespace_tokenize(const char *input, int *token_count);
+Token *tk_tokenize(const char *input, int *token_count);
 void tk_free(Token *tokens, int token_count);
 
 #endif
