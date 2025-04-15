@@ -21,7 +21,7 @@ build()
         fi
 
         SRC_FILES=$(find src -type f -name '*.c')
-        gcc -o "$OUTPUT" $SRC_FILES -Isrc/lib
+        gcc -o "$OUTPUT" $SRC_FILES -Isrc/lib -lm
 
         if [ $? -ne 0 ]; then
             exit 1

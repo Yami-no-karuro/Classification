@@ -14,8 +14,10 @@ typedef struct {
 } Classifier;
 
 Classifier *cls_create();
-
 void cls_train(Classifier *c, const char *text, MailClass label);
+MailClass cls_predict(Classifier *c, const char *text);
 void cls_free(Classifier *c);
+
+void cls_accumulate(const char *key, int value, void *user_data);
 
 #endif

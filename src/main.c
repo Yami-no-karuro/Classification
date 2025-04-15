@@ -19,7 +19,11 @@ int main()
     cls_train(classifier, "Can you review the code before deployment?", CLASS_HAM);
     cls_train(classifier, "Lunch at 1pm sounds great, see you then.", CLASS_HAM);
 
-    printf("Training completed on 8 examples.\n");
+    const char *input = "Can we have a meeting tomorrow to discuss the report?";
+    MailClass result1 = cls_predict(classifier, input);
+
+    printf("Input: %s\n", input);
+    printf("Prediction: %s\n", result1 == CLASS_SPAM ? "SPAM" : "HAM");
 
     cls_free(classifier);
     return 0;

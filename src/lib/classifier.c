@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "hash_table.h"
 #include "tokenizer.h"
@@ -64,6 +65,49 @@ void cls_train(Classifier *cls, const char *text, MailClass label)
 }
 
 /**
+ * Predicts whether a given text is SPAM or HAM based on the trained classifier.
+ *
+ * @param c - The classifier instance.
+ * @param text - The text to classify.
+ * @return The predicted class (SPAM or HAM).
+ */
+MailClass cls_predict(Classifier *c, const char *text)
+{
+    int token_count = 0;
+    Token *tokens = tk_tokenize(text, &token_count);
+    if (!tokens) {
+        printf("Error: Unable to allocate enough memory for tokenization.\n");
+        return CLASS_HAM;
+    }
+
+    double log_spam_prob = 0.0;
+    double log_ham_prob = 0.0;
+
+    double total_spam_words = 0.0;
+    double total_ham_words = 0.0;
+
+    ht_foreach(c->spam_counts, (ht_callback)cls_accumulate, &total_spam_words);
+    ht_foreach(c->ham_counts, (ht_callback)cls_accumulate, &total_ham_words);
+
+    for (int i = 0; i < token_count; i++) {
+        if (tokens[i].type != TOKEN_WORD) continue;
+
+        int spam_word_count = ht_search(c->spam_counts, tokens[i].content);
+        int ham_word_count = ht_search(c->ham_counts, tokens[i].content);
+
+        if (spam_word_count == -1) spam_word_count = 0;
+        if (ham_word_count == -1) ham_word_count = 0;
+
+        log_spam_prob += log((spam_word_count + 1.0) / (total_spam_words + 1.0 * c->spam_counts->size));
+        log_ham_prob += log((ham_word_count + 1.0) / (total_ham_words + 1.0 * c->ham_counts->size));
+
+    }
+
+    tk_free(tokens, token_count);
+    return log_spam_prob > log_ham_prob ? CLASS_SPAM : CLASS_HAM;
+}
+
+/**
  * Frees all memory associated with the classifier.
  *
  * @param cls - The classifier instance to free.
@@ -73,4 +117,18 @@ void cls_free(Classifier *cls)
     ht_free(cls->spam_counts);
     ht_free(cls->ham_counts);
     free(cls);
+}
+
+/**
+ * Callback function for ht_foreach to accumulate word counts.
+ * Used to calculate total word counts in spam and ham.
+ *
+ * @param key - The word (key).
+ * @param value - The word count (value).
+ * @param user_data - The pointer to the total word count.
+ */
+void cls_accumulate(const char *key, int value, void *user_data)
+{
+    double *total_words = (double *)user_data;
+    *total_words += value;
 }
