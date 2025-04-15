@@ -9,9 +9,9 @@
 /**
  * Creates and initializes a new Naive Bayes Classifier.
  *
- * @return A pointer to the newly allocated Classifier.
+ * @return - A pointer to the newly allocated Classifier.
  */
-Classifier *cls_create() 
+Classifier *cls_create()
 {
     Classifier *cls = (Classifier *)malloc(sizeof(Classifier));
     if (!cls) {
@@ -30,11 +30,11 @@ Classifier *cls_create()
 /**
  * Trains the classifier with a new sentence and its label (SPAM or HAM).
  *
- * @param c - The classifier instance to be trained.
+ * @param cls - The classifier instance to be trained.
  * @param text - The sentence to analyze.
  * @param label - The label associated with the sentence (SPAM or HAM).
  */
-void cls_train(Classifier *c, const char *text, MailClass label) 
+void cls_train(Classifier *cls, const char *text, MailClass label)
 {
     int token_count = 0;
     Token *tokens = tk_tokenize(text, &token_count);
@@ -44,10 +44,11 @@ void cls_train(Classifier *c, const char *text, MailClass label)
     }
 
     for (int i = 0; i < token_count; i++) {
-        if (tokens[i].type != TOKEN_WORD) continue;
+        if (tokens[i].type != TOKEN_WORD) 
+            continue;
 
-        HashTable *target = (label == CLASS_SPAM) ? c->spam_counts : c->ham_counts;
-        int *target_total = (label == CLASS_SPAM) ? &c->spam_total_words : &c->ham_total_words;
+        HashTable *target = (label == CLASS_SPAM) ? cls->spam_counts : cls->ham_counts;
+        int *target_total = (label == CLASS_SPAM) ? &cls->spam_total_words : &cls->ham_total_words;
 
         int count = ht_search(target, tokens[i].content);
         if (count == -1) {
@@ -65,14 +66,11 @@ void cls_train(Classifier *c, const char *text, MailClass label)
 /**
  * Frees all memory associated with the classifier.
  *
- * @param c - The classifier instance to free.
+ * @param cls - The classifier instance to free.
  */
-void cls_free(Classifier *c) 
+void cls_free(Classifier *cls)
 {
-    if (!c) return;
-
-    ht_free(c->spam_counts);
-    ht_free(c->ham_counts);
-    free(c);
+    ht_free(cls->spam_counts);
+    ht_free(cls->ham_counts);
+    free(cls);
 }
-
