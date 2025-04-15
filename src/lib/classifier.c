@@ -95,8 +95,11 @@ MailClass cls_predict(Classifier *c, const char *text)
         int spam_word_count = ht_search(c->spam_counts, tokens[i].content);
         int ham_word_count = ht_search(c->ham_counts, tokens[i].content);
 
-        if (spam_word_count == -1) spam_word_count = 0;
-        if (ham_word_count == -1) ham_word_count = 0;
+        if (spam_word_count == -1) 
+            spam_word_count = 0;
+
+        if (ham_word_count == -1) 
+            ham_word_count = 0;
 
         log_spam_prob += log((spam_word_count + 1.0) / (total_spam_words + 1.0 * c->spam_counts->size));
         log_ham_prob += log((ham_word_count + 1.0) / (total_ham_words + 1.0 * c->ham_counts->size));
