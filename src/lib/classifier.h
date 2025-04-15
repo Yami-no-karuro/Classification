@@ -19,4 +19,3 @@ void cls_train(Classifier *c, const char *text, MailClass label);
 void cls_free(Classifier *c);
 
 #endif
-
