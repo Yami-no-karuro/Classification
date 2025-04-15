@@ -1,18 +1,20 @@
-# C - Skeleton
+# C - Classification 
 
-## Starter template for C applications
+## Binary Classification (Naive Bayes classifier), in C
 
-### Setup
+### Intro
 
-- Clone the repository, `` git clone https://github.com/Yami-no-karuro/C-Skeleton.git ``
-- Change directory to the skeleton project, `` cd C-Skeleton ``
-- Remove the existing repository, `` rm -rf .git ``
-- Make the console utility file executable, `` chmod +x ./bin/console ``
-- Run the requirements check, `` bin/console check-requirements ``
-- Enjoy!
+**Classification** teaches a machine to sort things into categories.  
+It learns by looking at examples with labels (like emails marked “spam” or “not spam”).  
+After learning, it can decide which category new items belong to, like identifying if a new email is spam or not.  
+**Classification**, like **Linear Regression** is a type of **Supervised Learning Algorithm** that learns from the labelled datasets and maps the data points with most optimized linear functions which can be used for prediction on new datasets.  
+(More on [Supervised Learning](https://en.wikipedia.org/wiki/Supervised_learning), [Linear Regression](https://en.wikipedia.org/wiki/Linear_regression) and [Classification](https://en.wikipedia.org/wiki/Classification) on [Wikipedia](https://en.wikipedia.org/))
 
-### Commands
+### What is this example about?
 
-- `` bin/console check-requirements ``
-- `` bin/console build <debug|release> <source> ``
-- `` bin/console run <source> ``
+In this example we'll take a look at **Binary Classification**, the simplest form of **Classification**.  
+We will implement a **Naive Bayes Classifier** for a simple spam filter.
+
+### Work in progress...
+
+...
