@@ -1,41 +1,26 @@
 #include <stdio.h>
 
-#include "lib/string_utils.h"
-#include "lib/tokenizer.h"
-#include "lib/hash_table.h"
-
-void print_word_count(const char *key, int value, void *user_data) {
-    printf("'%s': %d\n", key, value);
-}
+#include "hash_table.h"
+#include "tokenizer.h"
+#include "string_utils.h"
+#include "classifier.h"
 
 int main() 
 {
-    int token_count = 0;
-    char *input = "Hi friend! It’s Brian, and I have a fantastic offer to earn extra income for your business.";
+    Classifier *classifier = cls_create();
 
-    Token *tokens = tk_tokenize(input, &token_count);
-    if (!tokens) {
-        printf("Error: unable to allocate enough memory for the tokenization process.\n");
-        return 1;
-    }
+    cls_train(classifier, "Congratulations, you've won a $1000 gift card!", CLASS_SPAM);
+    cls_train(classifier, "Earn money fast with this simple trick.", CLASS_SPAM);
+    cls_train(classifier, "Get rich quick with our exclusive offer.", CLASS_SPAM);
+    cls_train(classifier, "You have been selected for a free prize!", CLASS_SPAM);
 
-    HashTable *word_counts = ht_create(1024);
-    for (int i = 0; i < token_count; i++) {
-        if (!tokens[i].type == TOKEN_WORD)
-            continue;
+    cls_train(classifier, "Let's schedule a meeting for next week.", CLASS_HAM);
+    cls_train(classifier, "Don't forget to submit the report by Friday.", CLASS_HAM);
+    cls_train(classifier, "Can you review the code before deployment?", CLASS_HAM);
+    cls_train(classifier, "Lunch at 1pm sounds great, see you then.", CLASS_HAM);
 
-        int current_count = ht_search(word_counts, tokens[i].content);
-        if (current_count == -1) {
-            ht_insert(word_counts, tokens[i].content, 1);
-        } else {
-            ht_insert(word_counts, tokens[i].content, current_count + 1);
-        }
-    }
+    printf("Training completed on 8 examples.\n");
 
-    printf("Word frequencies:\n");
-    ht_foreach(word_counts, print_word_count, NULL);
-
-    tk_free(tokens, token_count);
-    ht_free(word_counts);
+    cls_free(classifier);
     return 0;
 }
