@@ -16,6 +16,8 @@ typedef struct {
     int count;
 } HashTable;
 
+typedef void (*ht_callback)(const char *key, int value, void *user_data);
+
 HashTable *ht_create(int size);
 
 void ht_resize(HashTable *table, int new_size);
@@ -25,5 +27,7 @@ void ht_free(HashTable *table);
 int ht_search(HashTable *table, const char *key);
 
 unsigned long ht_hash(const char *str, unsigned int table_size);
+
+void ht_foreach(HashTable *table, ht_callback callback, void *user_data);
 
 #endif
