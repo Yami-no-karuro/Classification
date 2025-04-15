@@ -5,7 +5,7 @@
 #include "string_utils.h"
 #include "classifier.h"
 
-int main() 
+int main()
 {
     Classifier *classifier = cls_create();
 
