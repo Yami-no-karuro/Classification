@@ -38,9 +38,7 @@ To avoid assigning zero probability to such unseen words, we use **Laplace Smoot
 
 This technique adjusts the word probabilities like so:
 
-$$
-P(w_i|Class) = \frac{count(w_i) + 1}{total\_words + V}
-$$
+$P(w_i|Class) = \frac{count(w_i) + 1}{total\_words + V}$
 
 Where:
 
