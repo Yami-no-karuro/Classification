@@ -50,6 +50,10 @@ This ensures that no probability is ever zero, making the classifier more robust
 This helps the classifier make predictions even when the input contains new or rare words.  
 (More on [Laplace Smoothing](https://en.wikipedia.org/wiki/Additive_smoothing) on [Wikipedia](https://en.wikipedia.org/))
 
+### How to get things running
+
+This project is based on the [C-Skeleton Template](https://github.com/Yami-no-karuro/C-Skeleton), please refer to the C-Skeleton [readme.md](https://github.com/Yami-no-karuro/C-Skeleton/blob/master/readme.md) for available commands.
+
 ### Conclusions
 
 The **Naive Bayes classifier** provides a simple yet powerful approach for solving text classification problems like spam detection.  
