@@ -1,20 +1,52 @@
-# C - Classification 
+# C - Classification
 
 ## Binary Classification (Naive Bayes classifier), in C
 
 ### Intro
 
 **Classification** teaches a machine to sort things into categories.  
-It learns by looking at examples with labels (like emails marked “spam” or “not spam”).  
+It learns by looking at examples with labels (like emails marked “spam”).
+
 After learning, it can decide which category new items belong to, like identifying if a new email is spam or not.  
-**Classification**, like **Linear Regression** is a type of **Supervised Learning Algorithm** that learns from the labelled datasets and maps the data points with most optimized linear functions which can be used for prediction on new datasets.  
+**Classification**, like **Linear Regression** is a type of **Supervised Learning Algorithm** that learns from the labelled datasets and maps the data points with most optimized linear functions which can be used for prediction on new datasets.
 (More on [Supervised Learning](https://en.wikipedia.org/wiki/Supervised_learning), [Linear Regression](https://en.wikipedia.org/wiki/Linear_regression) and [Classification](https://en.wikipedia.org/wiki/Classification) on [Wikipedia](https://en.wikipedia.org/))
 
 ### What is this example about?
 
-In this example we'll take a look at **Binary Classification**, the simplest form of **Classification**.  
+In this example we'll take a look at **Binary Classification**, the simplest form of Classification.  
 We will implement a **Naive Bayes Classifier** for a simple spam filter.
 
-### Work in progress...
+For example, let's consider a scenario where we want to distinguish spam emails by their subject lines.  
+By analyzing labelled data, the classifier learns the probability of certain words appearing in spam and non-spam messages.
 
-...
+We tokenize the subject line into individual words (features), and compute the probability of the message being spam or not spam using **Bayes' Theorem**:
+
+$P(Spam|Words) = [P(Words|Spam) * P(Spam)] / P(Words)$
+
+To simplify computation, we use the "naive" assumption that each word is conditionally independent given the class.  
+This allows us to compute:
+
+$P(Words|Spam) = P(w1|Spam) * P(w2|Spam) * ... * P(wn|Spam)$
+
+The example calculates these probabilities by analyzing a small, labelled dataset and then applies the model to new inputs to determine if they are spam.  
+(More on [Naive Bayes Classifier](https://en.wikipedia.org/wiki/Naive_Bayes_classifier) and [Bayes Theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem) on [Wikipedia](https://en.wikipedia.org/))
+
+### Handling Unknown Words: Laplace Smoothing
+
+When classifying new inputs, it's common to encounter words that were not seen during training.  
+To avoid assigning zero probability to such unseen words, we use **Laplace Smoothing** (also known as *add-one smoothing*).
+
+This technique adjusts the word probabilities like so:
+
+$$
+P(w_i|Class) = \frac{count(w_i) + 1}{total\_words + V}
+$$
+
+Where:
+
+- `count(w_i)` is the number of times word *w_i* appears in the given class.
+- `total_words` is the total word count for that class.
+- `V` is the vocabulary size (i.e., the number of unique words seen in training).
+
+This ensures that no probability is ever zero, making the classifier more robust when dealing with previously unseen data.  
+This helps the classifier make predictions even when the input contains new or rare words.
