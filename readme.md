@@ -51,3 +51,13 @@ Where:
 This ensures that no probability is ever zero, making the classifier more robust when dealing with previously unseen data.  
 This helps the classifier make predictions even when the input contains new or rare words.  
 (More on [Laplace Smoothing](https://en.wikipedia.org/wiki/Additive_smoothing) on [Wikipedia](https://en.wikipedia.org/))
+
+### Conclusions
+
+The **Naive Bayes classifier** provides a simple yet powerful approach for solving text classification problems like spam detection.  
+By leveraging **Bayes’ Theorem** and assuming conditional independence between words, it becomes computationally efficient and easy to implement, even in C.
+
+Using **Laplace Smoothing**, the model gracefully handles unknown words, ensuring robustness when faced with inputs not seen during training.  
+Despite its simplicity, Naive Bayes often performs surprisingly well in real-world applications, especially when working with clean, tokenized text.
+
+This example demonstrates the core ideas behind probabilistic classification, paving the way for more advanced techniques and real-world integration.
