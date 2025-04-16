@@ -50,6 +50,11 @@ This ensures that no probability is ever zero, making the classifier more robust
 This helps the classifier make predictions even when the input contains new or rare words.  
 (More on [Laplace Smoothing](https://en.wikipedia.org/wiki/Additive_smoothing) on [Wikipedia](https://en.wikipedia.org/))
 
+### Libraries & Honorable mentions
+
+This project makes extensive use of the [String-Utils](https://github.com/Yami-no-karuro/String-Utils) library for all string manipulation operations.  
+For word frequency mapping during training and classification, this project relies on the [Hash-Table](https://github.com/Yami-no-karuro/Hash-Table) implementation.
+
 ### How to get things running
 
 This project is based on the [C-Skeleton Template](https://github.com/Yami-no-karuro/C-Skeleton), please refer to the original [readme.md](https://github.com/Yami-no-karuro/C-Skeleton/blob/master/readme.md) for available commands.
