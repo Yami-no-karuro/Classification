@@ -49,4 +49,5 @@ Where:
 - `V` is the vocabulary size (i.e., the number of unique words seen in training).
 
 This ensures that no probability is ever zero, making the classifier more robust when dealing with previously unseen data.  
-This helps the classifier make predictions even when the input contains new or rare words.
+This helps the classifier make predictions even when the input contains new or rare words.  
+(More on [Laplace Smoothing](https://en.wikipedia.org/wiki/Additive_smoothing) on [Wikipedia](https://en.wikipedia.org/))
